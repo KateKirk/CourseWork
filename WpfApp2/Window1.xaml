@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfApp2.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800"
+        Background="Lavender">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height = "40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBlock>Name:</TextBlock>
+            <TextBox Text="{Binding Name}" ></TextBox>
+            <TextBlock>Type:</TextBlock>
+            <ComboBox Name ="CmbType" SelectedItem="{Binding Type_of_device}" DisplayMemberPath="Type_of_device1"></ComboBox>
+            <TextBlock>Serial_number:</TextBlock>
+            <TextBox Text="{Binding Serial_number}" ></TextBox>
+            <TextBlock>Inventory_number:</TextBlock>
+            <TextBox Text="{Binding Inventory_number}" ></TextBox>
+            <TextBlock>film:</TextBlock>
+            <DatePicker SelectedDate="{Binding Date_of_commissioning,StringFormat={}{0:dd MMMM yyyy}}" ></DatePicker>
+        </UniformGrid>
+        <Button x:Name="BtnSave" Grid.Row="1" Click="BtnSave_Click">Save</Button>
+    </Grid>
+</Window>

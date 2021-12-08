@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ESIR1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Serial_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inventory_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_commissioning" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report__of_repair">
+          <Key>
+            <PropertyRef Name="Number_of_report" />
+          </Key>
+          <Property Name="Number_of_report" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Inventory_number_of_device" Type="int" Nullable="false" />
+          <Property Name="Employee" Type="int" Nullable="false" />
+          <Property Name="Status_of_repair" Type="int" Nullable="false" />
+          <Property Name="Date_of_acceptance" Type="date" Nullable="false" />
+          <Property Name="Date_of_end_repair" Type="date" />
+          <Property Name="Type_of_problem" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Second_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fathers_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Date_of_Birth" Type="date" />
+          <Property Name="Phone_Number" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status_of_repair">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Status_of_repair" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_of_device">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type_of_device" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Type_of_problem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type_of_problem" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Devices_Type_of_device">
+          <End Role="Type_of_device" Type="Self.Type_of_device" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Devices">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Inventory_number_of_device" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Status_of_repair1">
+          <End Role="Status_of_repair" Type="Self.Status_of_repair" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_of_repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Status_of_repair" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Type_of_problem1">
+          <End Role="Type_of_problem" Type="Self.Type_of_problem" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_problem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Type_of_problem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ESIR1ModelContainer">
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report__of_repair" EntityType="Self.Report__of_repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_of_repair" EntityType="Self.Status_of_repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_of_device" EntityType="Self.Type_of_device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_of_problem" EntityType="Self.Type_of_problem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Devices_Type_of_device" Association="Self.FK_Devices_Type_of_device">
+            <End Role="Type_of_device" EntitySet="Type_of_device" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Devices" Association="Self.FK_Report__of_repair_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Staff" Association="Self.FK_Report__of_repair_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Status_of_repair1" Association="Self.FK_Report__of_repair_Status_of_repair1">
+            <End Role="Status_of_repair" EntitySet="Status_of_repair" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Type_of_problem1" Association="Self.FK_Report__of_repair_Type_of_problem1">
+            <End Role="Type_of_problem" EntitySet="Type_of_problem" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESIR1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Serial_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inventory_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_commissioning" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Type_of_device" Relationship="Self.FK_Devices_Type_of_device" FromRole="Devices" ToRole="Type_of_device" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Devices" FromRole="Devices" ToRole="Report__of_repair" />
+        </EntityType>
+        <EntityType Name="Report__of_repair">
+          <Key>
+            <PropertyRef Name="Number_of_report" />
+          </Key>
+          <Property Name="Number_of_report" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inventory_number_of_device" Type="Int32" Nullable="false" />
+          <Property Name="Employee" Type="Int32" Nullable="false" />
+          <Property Name="Status_of_repair" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_acceptance" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_of_end_repair" Type="DateTime" Precision="0" />
+          <Property Name="Type_of_problem" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_Report__of_repair_Devices" FromRole="Report__of_repair" ToRole="Devices" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Report__of_repair_Staff" FromRole="Report__of_repair" ToRole="Staff" />
+          <NavigationProperty Name="Status_of_repair1" Relationship="Self.FK_Report__of_repair_Status_of_repair" FromRole="Report__of_repair" ToRole="Status_of_repair" />
+          <NavigationProperty Name="Type_of_problem1" Relationship="Self.FK_Report__of_repair_Type_of_problem" FromRole="Report__of_repair" ToRole="Type_of_problem" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Second_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fathers_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Phone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Staff" FromRole="Staff" ToRole="Report__of_repair" />
+        </EntityType>
+        <EntityType Name="Status_of_repair">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Status_of_repair1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Status_of_repair" FromRole="Status_of_repair" ToRole="Report__of_repair" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_of_device">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_of_device1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Devices" Relationship="Self.FK_Devices_Type_of_device" FromRole="Type_of_device" ToRole="Devices" />
+        </EntityType>
+        <EntityType Name="Type_of_problem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_of_problem1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Type_of_problem" FromRole="Type_of_problem" ToRole="Report__of_repair" />
+        </EntityType>
+        <Association Name="FK_Devices_Type_of_device">
+          <End Role="Type_of_device" Type="Self.Type_of_device" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Devices">
+          <End Role="Devices" Type="Self.Device" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Inventory_number_of_device" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Status_of_repair">
+          <End Role="Status_of_repair" Type="Self.Status_of_repair" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_of_repair">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Status_of_repair" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report__of_repair_Type_of_problem">
+          <End Role="Type_of_problem" Type="Self.Type_of_problem" Multiplicity="1" />
+          <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_of_problem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Report__of_repair">
+              <PropertyRef Name="Type_of_problem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESIR1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Devices" EntityType="Self.Device" />
+          <EntitySet Name="Report__of_repair" EntityType="Self.Report__of_repair" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Status_of_repair" EntityType="Self.Status_of_repair" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Type_of_device" EntityType="Self.Type_of_device" />
+          <EntitySet Name="Type_of_problem" EntityType="Self.Type_of_problem" />
+          <AssociationSet Name="FK_Devices_Type_of_device" Association="Self.FK_Devices_Type_of_device">
+            <End Role="Type_of_device" EntitySet="Type_of_device" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Devices" Association="Self.FK_Report__of_repair_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Staff" Association="Self.FK_Report__of_repair_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Status_of_repair" Association="Self.FK_Report__of_repair_Status_of_repair">
+            <End Role="Status_of_repair" EntitySet="Status_of_repair" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report__of_repair_Type_of_problem" Association="Self.FK_Report__of_repair_Type_of_problem">
+            <End Role="Type_of_problem" EntitySet="Type_of_problem" />
+            <End Role="Report__of_repair" EntitySet="Report__of_repair" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ESIR1ModelContainer" CdmEntityContainer="ESIR1Entities1">
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="ESIR1Model.Device">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Serial_number" ColumnName="Serial_number" />
+                <ScalarProperty Name="Inventory_number" ColumnName="Inventory_number" />
+                <ScalarProperty Name="Date_of_commissioning" ColumnName="Date_of_commissioning" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report__of_repair">
+            <EntityTypeMapping TypeName="ESIR1Model.Report__of_repair">
+              <MappingFragment StoreEntitySet="Report__of_repair">
+                <ScalarProperty Name="Number_of_report" ColumnName="Number_of_report" />
+                <ScalarProperty Name="Inventory_number_of_device" ColumnName="Inventory_number_of_device" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Status_of_repair" ColumnName="Status_of_repair" />
+                <ScalarProperty Name="Date_of_acceptance" ColumnName="Date_of_acceptance" />
+                <ScalarProperty Name="Date_of_end_repair" ColumnName="Date_of_end_repair" />
+                <ScalarProperty Name="Type_of_problem" ColumnName="Type_of_problem" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="ESIR1Model.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Second_Name" ColumnName="Second_Name" />
+                <ScalarProperty Name="Fathers_Name" ColumnName="Fathers_Name" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date_of_Birth" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_of_repair">
+            <EntityTypeMapping TypeName="ESIR1Model.Status_of_repair">
+              <MappingFragment StoreEntitySet="Status_of_repair">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status_of_repair1" ColumnName="Status_of_repair" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ESIR1Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_of_device">
+            <EntityTypeMapping TypeName="ESIR1Model.Type_of_device">
+              <MappingFragment StoreEntitySet="Type_of_device">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type_of_device1" ColumnName="Type_of_device" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_of_problem">
+            <EntityTypeMapping TypeName="ESIR1Model.Type_of_problem">
+              <MappingFragment StoreEntitySet="Type_of_problem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type_of_problem1" ColumnName="Type_of_problem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

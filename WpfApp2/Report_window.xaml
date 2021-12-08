@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApp2.Report_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Report_window" Height="450" Width="800" Background="Lavender">
+    <Grid>
+        
+        <Canvas>
+            <Label Content="Отчёт о ремонте оборудования предприятия" Canvas.Left="105" FontSize="25" FontStyle="Oblique" FontWeight="Bold" FontFamily="ComicSansMS" ></Label>
+            <Label Content="Номер отчёта:" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="40" Canvas.Left="70" Height="44" Width="177"/>
+            <ComboBox Name ="CmbNumber" SelectedItem="{Binding Report__of_repair}" DisplayMemberPath="Number_of_report" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="40" Canvas.Left="270" Width="450" SelectionChanged="CmbNumber_SelectionChanged"/>
+            <Label Content="Ответственный сотрудник:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="100" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelEmployee" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="100" Canvas.Left="300" Width="450"/>
+            <Label Content="Инвентарный номер:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="140" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelInvNumb" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="140" Canvas.Left="300" Width="450"/>
+            <Label Content="Статус ремонта:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="180" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelStatus" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="180" Canvas.Left="300" Width="450"/>
+            <Label Content="Дата приёмки на ремонт:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="220" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelDA" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="220" Canvas.Left="300" Width="450"/>
+            <Label Content="Дата окончания ремонта:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="260" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelDE" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="260" Canvas.Left="300" Width="450"/>
+            <Label Content="Вид проблемы:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="300" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelType" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="300" Canvas.Left="300" Width="450"/>
+            <Label Content="Комментарий:" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="340" Canvas.Left="20" Height="44" Width="267"/>
+            <Label Name ="LabelComment" FontSize="20" FontFamily="ComicSansMS" Canvas.Top="340" Canvas.Left="300" Width="450"/>
+        </Canvas>
+    </Grid>
+</Window>

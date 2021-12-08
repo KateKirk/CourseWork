@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfApp2.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Window2" Height="450" Width="800"  Background="Lavender">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height = "40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBlock>Inventory number of device:</TextBlock>
+            <ComboBox Name ="CmbDevice" SelectedItem="{Binding Device}" DisplayMemberPath="Inventory_number"></ComboBox>
+            <TextBlock>Employee:</TextBlock>
+            <ComboBox Name ="CmbEmployee" SelectedItem="{Binding Staff}" DisplayMemberPath="Second_Name"></ComboBox>
+            <TextBlock>Status of repair:</TextBlock>
+            <ComboBox Name ="CmbStatus" SelectedItem="{Binding Status_of_repair1}" DisplayMemberPath="Status_of_repair1"></ComboBox>
+            <TextBlock>Date of acceptance:</TextBlock>
+            <DatePicker SelectedDate="{Binding Date_of_acceptance,StringFormat={}{0:dd MMMM yyyy}}" ></DatePicker>
+            <TextBlock>Date of end repair:</TextBlock>
+            <DatePicker SelectedDate="{Binding Date_of_end_repair,StringFormat={}{0:dd MMMM yyyy}}" ></DatePicker>
+            <TextBlock>Status of repair:</TextBlock>
+            <ComboBox Name ="CmbType" SelectedItem="{Binding Type_of_problem1}" DisplayMemberPath="Type_of_problem1"></ComboBox>
+            <TextBlock>Comment:</TextBlock>
+            <TextBox Text="{Binding Comment}" ></TextBox>
+        </UniformGrid>
+        <Button x:Name="BtnSave" Grid.Row="1" Click="BtnSave_Click">Save</Button>
+    </Grid>
+</Window>
