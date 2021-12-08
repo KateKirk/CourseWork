@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Report_window" Height="450" Width="800" Background="Lavender">
     <Grid>
-        
         <Canvas>
             <Label Content="Отчёт о ремонте оборудования предприятия" Canvas.Left="105" FontSize="25" FontStyle="Oblique" FontWeight="Bold" FontFamily="ComicSansMS" ></Label>
             <Label Content="Номер отчёта:" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="40" Canvas.Left="70" Height="44" Width="177"/>

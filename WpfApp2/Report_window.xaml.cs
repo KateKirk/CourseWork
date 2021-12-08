@@ -31,7 +31,7 @@ namespace WpfApp2
 
         private void CmbNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
     }
 }

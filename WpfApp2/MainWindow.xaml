@@ -4,12 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Course work" Height="450" Width="800" Background="Lavender">
+        Title="Course work" 
+        Height="450" 
+        Width="800" 
+        Background="Lavender">
     <Grid>
         <Canvas>
-            <Button x:Name="btnDevices" Background="AliceBlue" Content="Оборудование" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="100" Canvas.Left="60" Height="84" Width="199" Click="btnDevices_Click" />
-            <Button x:Name="btnReport" Background="AliceBlue"  Content="Отчёт о ремонте оборудования" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="265" Canvas.Left="207" Height="84" Width="385" Click="btnReport_Click" />
-            <Button x:Name="btnTable" Background="AliceBlue" Content="Таблица" FontSize="25" FontFamily="ComicSansMS" Canvas.Top="100" Canvas.Left="530" Height="84" Width="199" Click="btnTable_Click" />
+            <Button x:Name="btnDevices" 
+                    Background="AliceBlue" 
+                    Content="Оборудование" 
+                    FontSize="25" 
+                    FontFamily="ComicSansMS" 
+                    Canvas.Top="100" 
+                    Canvas.Left="60" 
+                    Height="84" 
+                    Width="199" 
+                    Click="btnDevices_Click" />
+            <Button x:Name="btnReport" 
+                    Background="AliceBlue"  
+                    Content="Отчёт о ремонте оборудования" 
+                    FontSize="25" 
+                    FontFamily="ComicSansMS" 
+                    Canvas.Top="265" 
+                    Canvas.Left="207" 
+                    Height="84" 
+                    Width="385" 
+                    Click="btnReport_Click" />
+            <Button x:Name="btnTable" 
+                    Background="AliceBlue" 
+                    Content="Таблица" 
+                    FontSize="25" 
+                    FontFamily="ComicSansMS" 
+                    Canvas.Top="100" 
+                    Canvas.Left="530" 
+                    Height="84" 
+                    Width="199" 
+                    Click="btnTable_Click" />
         </Canvas>
     </Grid>
 </Window>

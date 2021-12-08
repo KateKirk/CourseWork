@@ -12,23 +12,27 @@
             <ColumnDefinition Width="575*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
             <Button x:Name="BtnAdd" Click="BtnAdd_Click">Add</Button>
             <Button x:Name="BtnDelete" Click="BtnDelete_Click">Delete</Button>
-
         </StackPanel>
 
         <DataGrid Grid.Row="1" x:Name="DataGridSession" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Вид" Binding="{Binding Type_of_device.Type_of_device1}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Серийный номер" Binding="{Binding Serial_number}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Инвентаризационный номер" Binding="{Binding Inventory_number}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата введения в эксплуатацию" Binding="{Binding Date_of_commissioning, StringFormat={}{0:dd MMMM yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Наименование" 
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Вид" 
+                                    Binding="{Binding Type_of_device.Type_of_device1}"/>
+                <DataGridTextColumn Header="Серийный номер" 
+                                    Binding="{Binding Serial_number}"/>
+                <DataGridTextColumn Header="Инвентаризационный номер" 
+                                    Binding="{Binding Inventory_number}"/>
+                <DataGridTextColumn Header="Дата введения в эксплуатацию" 
+                                    Binding="{Binding Date_of_commissioning, StringFormat={}{0:dd MMMM yyyy}}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
