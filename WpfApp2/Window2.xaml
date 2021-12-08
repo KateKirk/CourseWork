@@ -5,15 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="800"  Background="Lavender">
+        Title="Edit" Height="450" Width="800"  Background="Lavender"  Icon="/Resources/repair.png">
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition></RowDefinition>
             <RowDefinition Height = "40"></RowDefinition>
         </Grid.RowDefinitions>
-        <UniformGrid Columns="2">
+        <UniformGrid Columns="2" Grid.Row="0">
+
             <TextBlock>Inventory number of device:</TextBlock>
-            <ComboBox Name ="CmbDevice" SelectedItem="{Binding Device}" DisplayMemberPath="Inventory_number"></ComboBox>
+            <ComboBox Name ="CmbDevice" SelectedItem="{Binding Devices}" DisplayMemberPath="Inventory_number"></ComboBox>
             <TextBlock>Employee:</TextBlock>
             <ComboBox Name ="CmbEmployee" SelectedItem="{Binding Staff}" DisplayMemberPath="Second_Name"></ComboBox>
             <TextBlock>Status of repair:</TextBlock>
@@ -26,6 +29,8 @@
             <ComboBox Name ="CmbType" SelectedItem="{Binding Type_of_problem1}" DisplayMemberPath="Type_of_problem1"></ComboBox>
             <TextBlock>Comment:</TextBlock>
             <TextBox Text="{Binding Comment}" ></TextBox>
+            <TextBlock>Report_Number:</TextBlock>
+            <TextBox Text="{Binding Report_number}" ></TextBox>
         </UniformGrid>
         <Button x:Name="BtnSave" Grid.Row="1" Click="BtnSave_Click">Save</Button>
     </Grid>

@@ -19,17 +19,17 @@ namespace WpfApp2
     /// </summary>
     public partial class Window_devices : Window
     {
-        ESIR1Entities1 context;
+        ESIR1Entities2 context;
 
         public Window_devices()
         {
             InitializeComponent();
-            context = new ESIR1Entities1();
+            context = new ESIR1Entities2();
             DataGridSession.ItemsSource = context.Devices.ToList();
         }
         public void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var newDevice = new Device();
+            var newDevice = new Devices();
             context.Devices.Add(newDevice);
             var win = new Window1(context, newDevice);
             win.ShowDialog();
@@ -37,7 +37,7 @@ namespace WpfApp2
         }
         public void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = DataGridSession.SelectedItem as Device;
+            var row = DataGridSession.SelectedItem as Devices;
             if (row == null)
             {
                 MessageBox.Show("Сначала выберите строку");
@@ -56,7 +56,7 @@ namespace WpfApp2
         public void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             Button dtnEdit = sender as Button;
-            var session = dtnEdit.DataContext as Device;
+            var session = dtnEdit.DataContext as Devices;
             var win = new Window1(context, session);
             win.ShowDialog();
         }

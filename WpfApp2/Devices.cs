@@ -12,10 +12,10 @@ namespace WpfApp2
     using System;
     using System.Collections.Generic;
     
-    public partial class Device
+    public partial class Devices
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Device()
+        public Devices()
         {
             this.Report__of_repair = new HashSet<Report__of_repair>();
         }

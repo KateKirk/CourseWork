@@ -19,13 +19,13 @@ namespace WpfApp2
     /// </summary>
     public partial class Window2 : Window
     {
-        ESIR1Entities1 context;
-        public Window2(ESIR1Entities1 context, Report__of_repair report)
+        ESIR1Entities2 context;
+        public Window2(ESIR1Entities2 context, Report__of_repair report)
         {
             InitializeComponent();
             this.context = context;
             CmbDevice.ItemsSource = context.Devices.ToList();
-            CmbEmployee.ItemsSource = context.Staffs.ToList();
+            CmbEmployee.ItemsSource = context.Staff.ToList();
             CmbStatus.ItemsSource = context.Status_of_repair.ToList();
             CmbType.ItemsSource = context.Type_of_problem.ToList();
             this.DataContext = report;

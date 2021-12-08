@@ -19,9 +19,9 @@ namespace WpfApp2
     /// </summary>
     public partial class Window1 : Window
     {
-        ESIR1Entities1 context;
+        ESIR1Entities2 context;
 
-        public Window1(ESIR1Entities1 context, Device devices)
+        public Window1(ESIR1Entities2 context, Devices devices)
         {
             InitializeComponent();
 

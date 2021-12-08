@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800"
-        Background="Lavender">
+        Background="Lavender"
+         Icon="/Resources/repair.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

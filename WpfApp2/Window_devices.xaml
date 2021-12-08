@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="Window_devices" Height="500" Width="1000" Background="Lavender">
+        Title="Window_devices" Height="500" Width="1000" Background="Lavender"  Icon="/Resources/repair.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="217*"/>

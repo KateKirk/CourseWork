@@ -19,11 +19,11 @@ namespace WpfApp2
     /// </summary>
     public partial class Window_Report : Window
     {
-        ESIR1Entities1 context;
+        ESIR1Entities2 context;
         public Window_Report()
         {
             InitializeComponent();
-            context = new ESIR1Entities1();
+            context = new ESIR1Entities2();
             DataGridReport.ItemsSource = context.Report__of_repair.ToList();
         }
         public void BtnAdd_Click(object sender, RoutedEventArgs e)

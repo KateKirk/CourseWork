@@ -7,7 +7,8 @@
         Title="Course work" 
         Height="450" 
         Width="800" 
-        Background="Lavender">
+        Background="Lavender"
+        Icon="/Resources/repair.png">
     <Grid>
         <Canvas>
             <Button x:Name="btnDevices" 
@@ -15,31 +16,21 @@
                     Content="Оборудование" 
                     FontSize="25" 
                     FontFamily="ComicSansMS" 
-                    Canvas.Top="100" 
-                    Canvas.Left="60" 
+                    Canvas.Top="75" 
+                    Canvas.Left="295" 
                     Height="84" 
                     Width="199" 
                     Click="btnDevices_Click" />
             <Button x:Name="btnReport" 
                     Background="AliceBlue"  
-                    Content="Отчёт о ремонте оборудования" 
+                    Content="Учёт ремонта оборудования на предприятии" 
                     FontSize="25" 
                     FontFamily="ComicSansMS" 
                     Canvas.Top="265" 
-                    Canvas.Left="207" 
+                    Canvas.Left="130" 
                     Height="84" 
-                    Width="385" 
+                    Width="532" 
                     Click="btnReport_Click" />
-            <Button x:Name="btnTable" 
-                    Background="AliceBlue" 
-                    Content="Таблица" 
-                    FontSize="25" 
-                    FontFamily="ComicSansMS" 
-                    Canvas.Top="100" 
-                    Canvas.Left="530" 
-                    Height="84" 
-                    Width="199" 
-                    Click="btnTable_Click" />
         </Canvas>
     </Grid>
 </Window>

@@ -19,14 +19,14 @@ namespace WpfApp2
     /// </summary>
     public partial class Report_window : Window
     {
-        ESIR1Entities1 context;
+        ESIR1Entities2 context;
 
-        public Report_window(ESIR1Entities1 context, Report__of_repair report)
+        public Report_window(ESIR1Entities2 context, Report__of_repair report)
         {
             InitializeComponent();
             this.context = context;
-            CmbNumber.ItemsSource = context.Report__of_repair.ToList();
             this.DataContext = report;
+           
         }
 
         private void CmbNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -22,8 +22,9 @@ namespace WpfApp2
         public Nullable<System.DateTime> Date_of_end_repair { get; set; }
         public int Type_of_problem { get; set; }
         public string Comment { get; set; }
+        public string Report_number { get; set; }
     
-        public virtual Device Device { get; set; }
+        public virtual Devices Devices { get; set; }
         public virtual Staff Staff { get; set; }
         public virtual Status_of_repair Status_of_repair1 { get; set; }
         public virtual Type_of_problem Type_of_problem1 { get; set; }

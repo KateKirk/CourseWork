@@ -13,10 +13,10 @@ namespace WpfApp2
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ESIR1Entities1 : DbContext
+    public partial class ESIR1Entities2 : DbContext
     {
-        public ESIR1Entities1()
-            : base("name=ESIR1Entities1")
+        public ESIR1Entities2()
+            : base("name=ESIR1Entities2")
         {
         }
     
@@ -25,11 +25,11 @@ namespace WpfApp2
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Device> Devices { get; set; }
+        public virtual DbSet<Devices> Devices { get; set; }
         public virtual DbSet<Report__of_repair> Report__of_repair { get; set; }
-        public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Staff> Staff { get; set; }
         public virtual DbSet<Status_of_repair> Status_of_repair { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_of_device> Type_of_device { get; set; }
         public virtual DbSet<Type_of_problem> Type_of_problem { get; set; }
     }

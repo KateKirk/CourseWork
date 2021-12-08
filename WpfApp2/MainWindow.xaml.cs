@@ -32,16 +32,10 @@ namespace WpfApp2
             window_Devices.Show();
             
         }
-
-        private void btnTable_Click(object sender, RoutedEventArgs e)
-        {
-            Window_Report window_Report = new Window_Report();
-            window_Report.Show();
-        }
-
         private void btnReport_Click(object sender, RoutedEventArgs e)
         {
-            
+             Window_Report window_Report = new Window_Report();
+            window_Report.Show();
         }
     }
 }

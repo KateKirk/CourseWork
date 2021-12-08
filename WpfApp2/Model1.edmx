@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище ESIR1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ESIR1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Devices">
           <Key>
             <PropertyRef Name="ID" />
@@ -28,6 +28,7 @@
           <Property Name="Date_of_end_repair" Type="date" />
           <Property Name="Type_of_problem" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Report_number" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -160,11 +161,12 @@
             <End Role="Report__of_repair" EntitySet="Report__of_repair" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ESIR1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Device">
+        <EntityType Name="Devices">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -189,10 +191,11 @@
           <Property Name="Date_of_end_repair" Type="DateTime" Precision="0" />
           <Property Name="Type_of_problem" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Device" Relationship="Self.FK_Report__of_repair_Devices" FromRole="Report__of_repair" ToRole="Devices" />
+          <Property Name="Report_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Devices" Relationship="Self.FK_Report__of_repair_Devices" FromRole="Report__of_repair" ToRole="Devices" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Report__of_repair_Staff" FromRole="Report__of_repair" ToRole="Staff" />
-          <NavigationProperty Name="Status_of_repair1" Relationship="Self.FK_Report__of_repair_Status_of_repair" FromRole="Report__of_repair" ToRole="Status_of_repair" />
-          <NavigationProperty Name="Type_of_problem1" Relationship="Self.FK_Report__of_repair_Type_of_problem" FromRole="Report__of_repair" ToRole="Type_of_problem" />
+          <NavigationProperty Name="Status_of_repair1" Relationship="Self.FK_Report__of_repair_Status_of_repair1" FromRole="Report__of_repair" ToRole="Status_of_repair" />
+          <NavigationProperty Name="Type_of_problem1" Relationship="Self.FK_Report__of_repair_Type_of_problem1" FromRole="Report__of_repair" ToRole="Type_of_problem" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -212,9 +215,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Status_of_repair1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Status_of_repair" FromRole="Status_of_repair" ToRole="Report__of_repair" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Status_of_repair1" FromRole="Status_of_repair" ToRole="Report__of_repair" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -238,11 +241,11 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Type_of_problem1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Type_of_problem" FromRole="Type_of_problem" ToRole="Report__of_repair" />
+          <NavigationProperty Name="Report__of_repair" Relationship="Self.FK_Report__of_repair_Type_of_problem1" FromRole="Type_of_problem" ToRole="Report__of_repair" />
         </EntityType>
         <Association Name="FK_Devices_Type_of_device">
           <End Role="Type_of_device" Type="Self.Type_of_device" Multiplicity="1" />
-          <End Role="Devices" Type="Self.Device" Multiplicity="*" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_of_device">
               <PropertyRef Name="ID" />
@@ -253,7 +256,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Report__of_repair_Devices">
-          <End Role="Devices" Type="Self.Device" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
           <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
@@ -276,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report__of_repair_Status_of_repair">
+        <Association Name="FK_Report__of_repair_Status_of_repair1">
           <End Role="Status_of_repair" Type="Self.Status_of_repair" Multiplicity="1" />
           <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report__of_repair_Type_of_problem">
+        <Association Name="FK_Report__of_repair_Type_of_problem1">
           <End Role="Type_of_problem" Type="Self.Type_of_problem" Multiplicity="1" />
           <End Role="Report__of_repair" Type="Self.Report__of_repair" Multiplicity="*" />
           <ReferentialConstraint>
@@ -300,12 +303,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ESIR1Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Devices" EntityType="Self.Device" />
+        <EntityContainer Name="ESIR1Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Devices" EntityType="Self.Devices" />
           <EntitySet Name="Report__of_repair" EntityType="Self.Report__of_repair" />
-          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
           <EntitySet Name="Status_of_repair" EntityType="Self.Status_of_repair" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type_of_device" EntityType="Self.Type_of_device" />
           <EntitySet Name="Type_of_problem" EntityType="Self.Type_of_problem" />
           <AssociationSet Name="FK_Devices_Type_of_device" Association="Self.FK_Devices_Type_of_device">
@@ -317,14 +320,14 @@
             <End Role="Report__of_repair" EntitySet="Report__of_repair" />
           </AssociationSet>
           <AssociationSet Name="FK_Report__of_repair_Staff" Association="Self.FK_Report__of_repair_Staff">
-            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Staff" EntitySet="Staff" />
             <End Role="Report__of_repair" EntitySet="Report__of_repair" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report__of_repair_Status_of_repair" Association="Self.FK_Report__of_repair_Status_of_repair">
+          <AssociationSet Name="FK_Report__of_repair_Status_of_repair1" Association="Self.FK_Report__of_repair_Status_of_repair1">
             <End Role="Status_of_repair" EntitySet="Status_of_repair" />
             <End Role="Report__of_repair" EntitySet="Report__of_repair" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report__of_repair_Type_of_problem" Association="Self.FK_Report__of_repair_Type_of_problem">
+          <AssociationSet Name="FK_Report__of_repair_Type_of_problem1" Association="Self.FK_Report__of_repair_Type_of_problem1">
             <End Role="Type_of_problem" EntitySet="Type_of_problem" />
             <End Role="Report__of_repair" EntitySet="Report__of_repair" />
           </AssociationSet>
@@ -334,9 +337,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ESIR1ModelContainer" CdmEntityContainer="ESIR1Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ESIR1ModelContainer" CdmEntityContainer="ESIR1Entities2">
           <EntitySetMapping Name="Devices">
-            <EntityTypeMapping TypeName="ESIR1Model.Device">
+            <EntityTypeMapping TypeName="ESIR1Model.Devices">
               <MappingFragment StoreEntitySet="Devices">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -358,10 +361,11 @@
                 <ScalarProperty Name="Date_of_end_repair" ColumnName="Date_of_end_repair" />
                 <ScalarProperty Name="Type_of_problem" ColumnName="Type_of_problem" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Report_number" ColumnName="Report_number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
+          <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="ESIR1Model.Staff">
               <MappingFragment StoreEntitySet="Staff">
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -382,7 +386,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ESIR1Model.sysdiagram">
+            <EntityTypeMapping TypeName="ESIR1Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -422,7 +426,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
